@@ -3,9 +3,14 @@
 
 require "../vendor/autoload.php";
 
-$app = new \Slim\Slim();
+$app = new \Slim\Slim(array(
+	'debug' => true
+));
 
 define("SPECIALCONSTANT", true);
+
+
+
 require 'libs/connection.php';
 
 require "routes/api.php";
