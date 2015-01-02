@@ -1,7 +1,7 @@
 <?php 
 if(!defined("SPECIALCONSTANT")) die("Acceso Denegado");
 
-	$app->group('/usuarios', function() use($app){
+	$app->group('/usuario', function() use($app){
 		$app->response->headers->set('Content-type','application/json');
 		
 
@@ -76,15 +76,14 @@ if(!defined("SPECIALCONSTANT")) die("Acceso Denegado");
 			}
 		});
 
-		$app->delete('/delete:id',function($id) use($app){
-			$sql = "DELETE * FROM usuario WHERE usu_id = :usu_id";
+		$app->delete('/delete/:id',function($id) use($app){
+			$sql = "DELETE FROM usuario WHERE usu_id = :usu_id";
 			try{
 				$db = getConnection();
 				$stmt = $db->prepare($sql);
 				$stmt->bindParam(':usu_id',$id,PDO::PARAM_STR);
 				$stmt->execute();
 				$db = null;
-				echo json_encode($usuario);
 			}catch(PDOException $e){
 				echo json_encode(array("error" => array("text" => $e->getMessage()))); 
 			}

@@ -4,12 +4,44 @@
 		"selected_items":
 		[
 			[
-				"conv",
-				"convertir_general"
+				"PDO",
+				"PDOException"
+			],
+			[
+				"usu",
+				"usuario"
 			],
 			[
 				"json",
 				"json_encode"
+			],
+			[
+				"smt",
+				"stmt"
+			],
+			[
+				"req",
+				"request"
+			],
+			[
+				"cap",
+				"capsule"
+			],
+			[
+				"defin",
+				"defined"
+			],
+			[
+				"curl_e",
+				"curl_exec"
+			],
+			[
+				"curl",
+				"curl_setopt"
+			],
+			[
+				"conv",
+				"convertir_general"
 			],
 			[
 				"producto",
@@ -164,26 +196,34 @@
 	"buffers":
 	[
 		{
-			"file": "index.php",
+			"file": "api/index.php",
 			"settings":
 			{
-				"buffer_size": 209,
+				"buffer_size": 783,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "libs/connect.php",
+			"file": "api/routes/api.php",
 			"settings":
 			{
-				"buffer_size": 404,
+				"buffer_size": 283,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "libs/api.php",
+			"file": "api/model/usuario.php",
 			"settings":
 			{
-				"buffer_size": 500,
+				"buffer_size": 3130,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "api/libs/connection.php",
+			"settings":
+			{
+				"buffer_size": 413,
 				"line_ending": "Unix"
 			}
 		}
@@ -228,6 +268,19 @@
 	},
 	"file_history":
 	[
+		"/Applications/MAMP/htdocs/coffe/api/config/api.php",
+		"/Applications/MAMP/htdocs/coffe/api/libs/connection.php",
+		"/Applications/MAMP/htdocs/coffe/api/config/connection.php",
+		"/Applications/MAMP/htdocs/coffe/api/libs/api.php",
+		"/Applications/MAMP/htdocs/coffe/api/index.php",
+		"/Applications/MAMP/htdocs/coffe/api/.htaccess",
+		"/Applications/MAMP/htdocs/coffe/index.html",
+		"/Applications/MAMP/htdocs/coffe/libs/connect.php",
+		"/Applications/MAMP/htdocs/coffe/index.php",
+		"/Applications/MAMP/htdocs/coffe/consumer.php",
+		"/Applications/MAMP/htdocs/coffe/libs/api.php",
+		"/Applications/MAMP/htdocs/coffe/api/libs/connect.php",
+		"/Applications/MAMP/htdocs/coffe/.htaccess",
 		"/Applications/MAMP/htdocs/ElZapotal/application/models/mesa.php",
 		"/Applications/MAMP/htdocs/ElZapotal/recursos/js/jquery.crud.js",
 		"/Applications/MAMP/htdocs/ElZapotal/application/views/mesa.php",
@@ -339,23 +392,24 @@
 			[
 				{
 					"buffer": 0,
-					"file": "index.php",
+					"file": "api/index.php",
 					"settings":
 					{
-						"buffer_size": 209,
+						"buffer_size": 783,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								98,
-								98
+								131,
+								131
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/PHP/PHP.tmLanguage"
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -365,23 +419,24 @@
 				},
 				{
 					"buffer": 1,
-					"file": "libs/connect.php",
+					"file": "api/routes/api.php",
 					"settings":
 					{
-						"buffer_size": 404,
+						"buffer_size": 283,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								398,
-								398
+								256,
+								256
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/PHP/PHP.tmLanguage"
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -391,25 +446,51 @@
 				},
 				{
 					"buffer": 2,
-					"file": "libs/api.php",
+					"file": "api/model/usuario.php",
 					"settings":
 					{
-						"buffer_size": 500,
+						"buffer_size": 3130,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								70,
-								70
+								3125,
+								3125
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/HTML/HTML.tmLanguage"
+							"syntax": "Packages/PHP/PHP.tmLanguage"
 						},
 						"translation.x": 0.0,
+						"translation.y": 913.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "api/libs/connection.php",
+					"settings":
+					{
+						"buffer_size": 413,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								407,
+								407
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage"
+						},
+						"translation.x": 50.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
@@ -474,6 +555,6 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 199.0,
+	"side_bar_width": 127.0,
 	"status_bar_visible": true
 }
