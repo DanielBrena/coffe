@@ -13,6 +13,7 @@ $app->group('/api',function() use($app){
 	require "model/categoria_producto.php";
 	require "model/ingrediente.php";
 	require "model/producto.php";
+	require "model/producto_has_ingrediente.php";
 
 });
  ?>

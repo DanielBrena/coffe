@@ -38,7 +38,7 @@ if(!defined("SPECIALCONSTANT")) die("Acceso Denegado");
 		$app->post('/add', function() use($app){
 			$request = $app->request();
 			$producto = json_decode($request->getBody());
-			$sql = "INSERT INTO producto (pro_id,pro_nombre,pro_descripcion,pro_img,pro_precio,pro_existe,pro_genera_iva,pro_fecha_creacion,categoria_producto_cp_id) VALUES (:pro_id,pro_nombre,:pro_descripcion,:pro_img,:pro_precio,:pro_existe,:pro_genera_iva,:pro_fecha_creacion,:categoria_producto_cp_id)";
+			$sql = "INSERT INTO producto (pro_id,pro_nombre,pro_descripcion,pro_img,pro_precio,pro_existe,pro_genera_iva,pro_fecha_creacion,categoria_producto_cp_id) VALUES (:pro_id,:pro_nombre,:pro_descripcion,:pro_img,:pro_precio,:pro_existe,:pro_genera_iva,:pro_fecha_creacion,:categoria_producto_cp_id)";
 			try{
 				$db = getConnection();
 				$stmt = $db->prepare($sql);

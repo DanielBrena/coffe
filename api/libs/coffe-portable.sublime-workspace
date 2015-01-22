@@ -4,6 +4,34 @@
 		"selected_items":
 		[
 			[
+				"mostra",
+				"mostrar_productos"
+			],
+			[
+				"caja",
+				"caja_productos"
+			],
+			[
+				"te",
+				"text-align"
+			],
+			[
+				"lis",
+				"list-style"
+			],
+			[
+				"SQL",
+				"sql_pp"
+			],
+			[
+				"sql",
+				"sql_pp"
+			],
+			[
+				"sql_",
+				"sql_pp"
+			],
+			[
 				"ing_i",
 				"ing_id"
 			],
@@ -252,6 +280,15 @@
 	},
 	"file_history":
 	[
+		"/Applications/MAMP/htdocs/coffe-portable/addProducto.html",
+		"/Applications/MAMP/htdocs/CRUD-HTML-5-Web-Sql-Database/app.js",
+		"/Applications/MAMP/htdocs/coffe-portable/index.html",
+		"/Applications/MAMP/htdocs/coffe-portable/css/estilo_principal.css",
+		"/Applications/MAMP/htdocs/coffe-portable/js/coffe.js",
+		"/Applications/MAMP/htdocs/coffe-portable/js/database.js",
+		"/Applications/MAMP/htdocs/coffe-portable/js/pedido.js",
+		"/Applications/MAMP/htdocs/coffe-portable/js/addProducto.js",
+		"/Applications/MAMP/htdocs/CRUD-HTML-5-Web-Sql-Database/index.html",
 		"/Applications/MAMP/htdocs/coffe/api/libs/connection.php",
 		"/Applications/MAMP/htdocs/coffe/api/model/usuario.php",
 		"/Applications/MAMP/htdocs/coffe/api/model/ingrediente.php",
@@ -335,7 +372,7 @@
 	],
 	"find":
 	{
-		"height": 0.0
+		"height": 35.0
 	},
 	"find_in_files":
 	{
@@ -349,6 +386,10 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"	\n",
+			"personas",
+			"sexo",
+			"apellidoPaterno",
 			"persona",
 			"Persona",
 			"return",
@@ -366,6 +407,8 @@
 		"regex": false,
 		"replace_history":
 		[
+			"precio",
+			"producto"
 		],
 		"reverse": false,
 		"show_context": true,
@@ -414,7 +457,7 @@
 	"menu_visible": true,
 	"replace":
 	{
-		"height": 0.0
+		"height": 64.0
 	},
 	"save_all_on_build": true,
 	"select_file":
