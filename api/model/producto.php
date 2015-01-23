@@ -59,16 +59,17 @@ if(!defined("SPECIALCONSTANT")) die("Acceso Denegado");
 				echo json_encode(array("error" => array("text" => $e->getMessage()))); 
 			}
 		});
-
+		
+		//falta where
 		$app->put('/update/:id', function($id) use($app){
 
 			$request = $app->request();
 			$producto = json_decode($request->getBody());
-			$sql = "UPDATE producto SET pro_nombre = :pro_nombre, pro_descripcion=:pro_descripcion,pro_img=:pro_img,pro_precio=:pro_precio,pro_existe=:pro_existe,pro_genera_iva=:pro_genera_iva,pro_fecha_creacion=:pro_fecha_creacion,categoria_producto_cp_id=:categoria_producto_cp_id";
+			$sql = "UPDATE producto SET pro_nombre = :pro_nombre, pro_descripcion=:pro_descripcion,pro_img=:pro_img,pro_precio=:pro_precio,pro_existe=:pro_existe,pro_genera_iva=:pro_genera_iva,pro_fecha_creacion=:pro_fecha_creacion,categoria_producto_cp_id=:categoria_producto_cp_id WHERE pro_id = :pro_id ";
 			try{
 				$db = getConnection();
 				$stmt = $db->prepare($sql);
-				$stmt->bindParam(':pro_id',$producto->pro_id,PDO::PARAM_STR);
+				$stmt->bindParam(':pro_id',$id,PDO::PARAM_STR);
 				$stmt->bindParam(':pro_nombre',$producto->pro_nombre,PDO::PARAM_STR);
 				$stmt->bindParam(':pro_descripcion',$producto->pro_descripcion,PDO::PARAM_STR);
 				$stmt->bindParam(':pro_img',$producto->pro_img,PDO::PARAM_STR);

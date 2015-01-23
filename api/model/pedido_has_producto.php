@@ -68,17 +68,17 @@ if(!defined("SPECIALCONSTANT")) die("Acceso Denegado");
 			}
 		});
 
-		$app->put('/update/:id1/:id2/:val', function($id1,$id2,$val) use($app){
+		$app->put('/update/:id1/:id2/', function($id1,$id2) use($app){
 
 			$request = $app->request();
 			$pedido_has_producto = json_decode($request->getBody());
-			$sql = "UPDATE pedido_has_producto SET pp_estado = :val WHERE pedido_ped_id = :pedido_ped_id AND producto_pro_id = :producto_pro_id";
+			$sql = "UPDATE pedido_has_producto SET pp_estado = :pp_estado WHERE pedido_ped_id = :pedido_ped_id AND producto_pro_id = :producto_pro_id";
 			try{
 				$db = getConnection();
 				$stmt = $db->prepare($sql);
-				$stmt->bindParam(':val',$val,PDO::PARAM_STR);
-				$stmt->bindParam(':pedido_ped_id',$usuario->usu_usuario,PDO::PARAM_STR);
-				$stmt->bindParam(':producto_pro_id',$usuario->usu_password,PDO::PARAM_STR);
+				$stmt->bindParam(':pp_estado',$pedido_has_producto->pp_estado,PDO::PARAM_STR);
+				$stmt->bindParam(':pedido_ped_id',$pedido_has_producto->pedido_ped_id,PDO::PARAM_STR);
+				$stmt->bindParam(':producto_pro_id',$pedido_has_producto->producto_pro_id,PDO::PARAM_STR);
 				$stmt->execute();
 				$db = null;
 				echo json_encode($pedido_has_producto);

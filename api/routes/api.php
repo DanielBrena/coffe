@@ -14,6 +14,8 @@ $app->group('/api',function() use($app){
 	require "model/ingrediente.php";
 	require "model/producto.php";
 	require "model/producto_has_ingrediente.php";
+	require "model/pedido.php";
+	require "model/pedido_has_producto.php";
 
 });
  ?>
