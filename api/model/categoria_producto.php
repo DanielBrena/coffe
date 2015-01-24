@@ -38,16 +38,17 @@ if(!defined("SPECIALCONSTANT")) die("Acceso Denegado");
 		$app->post('/add', function() use($app){
 			$request = $app->request();
 			$categoria_producto = json_decode($request->getBody());
+			$id = uniqid();
 			$sql = "INSERT INTO categoria_producto (cp_id,cp_nombre,cp_descripcion,cp_fecha_creacion) VALUES (:cp_id,:cp_nombre,:cp_descripcion,:cp_fecha_creacion)";
 			try{
 				$db = getConnection();
 				$stmt = $db->prepare($sql);
-				$stmt->bindParam(':cp_id',$categoria_producto->cp_id,PDO::PARAM_STR);
+				$stmt->bindParam(':cp_id', $id /*$categoria_producto->cp_id*/,PDO::PARAM_STR);
 				$stmt->bindParam(':cp_nombre',$categoria_producto->cp_nombre,PDO::PARAM_STR);
 				$stmt->bindParam(':cp_descripcion',$categoria_producto->cp_descripcion,PDO::PARAM_STR);
 				$stmt->bindParam(':cp_fecha_creacion',$categoria_producto->cp_fecha_creacion,PDO::PARAM_STR);
 				$stmt->execute();
-				$categoria_producto->cp_id = $db->lastInsertId();
+				$categoria_producto->cp_id = $id;
 				$db = null;
 				echo json_encode($categoria_producto);
 			}catch(PDOException $e){
@@ -83,6 +84,7 @@ if(!defined("SPECIALCONSTANT")) die("Acceso Denegado");
 				$stmt->bindParam(':cp_id',$id,PDO::PARAM_STR);
 				$stmt->execute();
 				$db = null;
+				echo json_encode($id);
 			}catch(PDOException $e){
 				echo json_encode(array("error" => array("text" => $e->getMessage()))); 
 			}
