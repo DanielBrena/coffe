@@ -4,6 +4,70 @@
 		"selected_items":
 		[
 			[
+				"btn_",
+				"btn_eliminar"
+			],
+			[
+				"find",
+				"findAll"
+			],
+			[
+				"upda",
+				"updateCategoria"
+			],
+			[
+				"add",
+				"addCategoria"
+			],
+			[
+				"fecha",
+				"fecha"
+			],
+			[
+				"max",
+				"max-height"
+			],
+			[
+				"ped",
+				"pedido_has_producto"
+			],
+			[
+				"pedid",
+				"pedido_ped_id"
+			],
+			[
+				"id",
+				"id2"
+			],
+			[
+				"prod",
+				"producto_pro_id"
+			],
+			[
+				"pedd",
+				"pedido_ped_id"
+			],
+			[
+				"pe",
+				"pedido_ped_id"
+			],
+			[
+				"pedido",
+				"pedido_has_producto"
+			],
+			[
+				"produ",
+				"producto_has_ingrediente"
+			],
+			[
+				"produc",
+				"producto_pro_id"
+			],
+			[
+				"pro",
+				"producto_has_ingrediente"
+			],
+			[
 				"ing_i",
 				"ing_id"
 			],
@@ -80,10 +144,6 @@
 				"ingrediente_id"
 			],
 			[
-				"produ",
-				"producto_id"
-			],
-			[
 				"product",
 				"producto_default"
 			],
@@ -146,10 +206,6 @@
 			[
 				"ob",
 				"obtener"
-			],
-			[
-				"id",
-				"id"
 			],
 			[
 				"bac",
@@ -252,13 +308,24 @@
 	},
 	"file_history":
 	[
-		"/Applications/MAMP/htdocs/coffe/api/libs/connection.php",
-		"/Applications/MAMP/htdocs/coffe/api/model/usuario.php",
-		"/Applications/MAMP/htdocs/coffe/api/model/ingrediente.php",
+		"/Applications/MAMP/htdocs/coffe/frontend/producto.html",
+		"/Applications/MAMP/htdocs/coffe/frontend/producto_ingrediente.html",
+		"/Applications/MAMP/htdocs/coffe/frontend/pedido.html",
 		"/Applications/MAMP/htdocs/coffe/api/model/categoria_producto.php",
+		"/Applications/MAMP/htdocs/coffe/frontend/categoria_producto.html",
+		"/Applications/MAMP/htdocs/coffe/frontend/js/categoria_producto.js",
 		"/Applications/MAMP/htdocs/coffe/api/routes/api.php",
-		"/Applications/MAMP/htdocs/coffe/api/index.php",
+		"/Applications/MAMP/htdocs/coffe/frontend/usuario.html",
+		"/Applications/MAMP/htdocs/coffe/frontend/css/style.css",
+		"/Applications/MAMP/htdocs/coffe/frontend/ingrediente.html",
+		"/Applications/MAMP/htdocs/coffe/api/model/pedido.php",
 		"/Applications/MAMP/htdocs/coffe/api/model/producto.php",
+		"/Applications/MAMP/htdocs/coffe/api/model/usuario.php",
+		"/Applications/MAMP/htdocs/coffe/api/model/producto_has_ingrediente.php",
+		"/Applications/MAMP/htdocs/coffe/api/model/pedido_has_producto.php",
+		"/Applications/MAMP/htdocs/coffe/api/model/ingrediente.php",
+		"/Applications/MAMP/htdocs/coffe/api/libs/connection.php",
+		"/Applications/MAMP/htdocs/coffe/api/index.php",
 		"/Applications/MAMP/htdocs/coffe/api/config/api.php",
 		"/Applications/MAMP/htdocs/coffe/api/config/connection.php",
 		"/Applications/MAMP/htdocs/coffe/api/libs/api.php",
@@ -335,7 +402,7 @@
 	],
 	"find":
 	{
-		"height": 0.0
+		"height": 35.0
 	},
 	"find_in_files":
 	{
@@ -349,6 +416,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"addw",
 			"persona",
 			"Persona",
 			"return",
@@ -437,6 +505,6 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 127.0,
+	"side_bar_width": 287.0,
 	"status_bar_visible": true
 }

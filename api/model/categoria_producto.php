@@ -3,9 +3,12 @@ if(!defined("SPECIALCONSTANT")) die("Acceso Denegado");
 
 	$app->group('/categoria_producto', function() use($app){
 		$app->response->headers->set('Content-type','application/json');
+        $app->response->header('Access-Control-Allow-Origin','*');
 		
 
 		$app->get('/all', function() use($app){
+            
+            
 			$sql = "SELECT * FROM categoria_producto";
 			try{
 				$db = getConnection();
@@ -34,11 +37,29 @@ if(!defined("SPECIALCONSTANT")) die("Acceso Denegado");
 				echo json_encode(array("error" => array("text" => $e->getMessage())));
 			}
 		});
+        
+        $app->get('/like/:like', function($like) use($app){
+			$sql = "SELECT * FROM categoria_producto WHERE cp_nombre like :like";
+			try{
+				$db = getConnection();
+				$stmt = $db->prepare($sql);
+                $like = "%".$like."%";
+                $stmt->bindParam(':like',$like,PDO::PARAM_STR);
+				$stmt->execute();
+				$categoria_productos = $stmt->fetchAll(PDO::FETCH_OBJ);
+				$db = null;
+				echo json_encode(array("categoria_producto" => $categoria_productos));
+			}
+			catch(PDOException $e){
+				echo json_encode(array("error" => array("text" => $e->getMessage())));
+			}
+		});
 
 		$app->post('/add', function() use($app){
 			$request = $app->request();
 			$categoria_producto = json_decode($request->getBody());
 			$id = uniqid();
+            $fecha = date("Y-m-d");
 			$sql = "INSERT INTO categoria_producto (cp_id,cp_nombre,cp_descripcion,cp_fecha_creacion) VALUES (:cp_id,:cp_nombre,:cp_descripcion,:cp_fecha_creacion)";
 			try{
 				$db = getConnection();
@@ -46,7 +67,7 @@ if(!defined("SPECIALCONSTANT")) die("Acceso Denegado");
 				$stmt->bindParam(':cp_id', $id /*$categoria_producto->cp_id*/,PDO::PARAM_STR);
 				$stmt->bindParam(':cp_nombre',$categoria_producto->cp_nombre,PDO::PARAM_STR);
 				$stmt->bindParam(':cp_descripcion',$categoria_producto->cp_descripcion,PDO::PARAM_STR);
-				$stmt->bindParam(':cp_fecha_creacion',$categoria_producto->cp_fecha_creacion,PDO::PARAM_STR);
+				$stmt->bindParam(':cp_fecha_creacion',$fecha,PDO::PARAM_STR);
 				$stmt->execute();
 				$categoria_producto->cp_id = $id;
 				$db = null;
