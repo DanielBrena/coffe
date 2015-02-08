@@ -15,7 +15,7 @@ if(!defined("SPECIALCONSTANT")) die("Acceso Denegado");
 				$smt = $db->query($sql);
 				$categoria_productos = $smt->fetchAll(PDO::FETCH_OBJ);
 				$db = null;
-				echo json_encode(array("categoria_producto" => $categoria_productos));
+				echo json_encode(array("categoria_productos" => $categoria_productos));
 			}
 			catch(PDOException $e){
 				echo json_encode(array("error" => array("text" => $e->getMessage())));
@@ -48,7 +48,7 @@ if(!defined("SPECIALCONSTANT")) die("Acceso Denegado");
 				$stmt->execute();
 				$categoria_productos = $stmt->fetchAll(PDO::FETCH_OBJ);
 				$db = null;
-				echo json_encode(array("categoria_producto" => $categoria_productos));
+				echo json_encode(array("categoria_productos" => $categoria_productos));
 			}
 			catch(PDOException $e){
 				echo json_encode(array("error" => array("text" => $e->getMessage())));

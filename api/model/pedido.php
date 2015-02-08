@@ -3,7 +3,8 @@ if(!defined("SPECIALCONSTANT")) die("Acceso Denegado");
 
 	$app->group('/pedido', function() use($app){
 		$app->response->headers->set('Content-type','application/json');
-		
+		$app->response->header('Access-Control-Allow-Origin','*');
+
 
 		$app->get('/all', function() use($app){
 			$sql = "SELECT * FROM pedido";
@@ -37,15 +38,18 @@ if(!defined("SPECIALCONSTANT")) die("Acceso Denegado");
 
 		$app->post('/add', function() use($app){
 			$request = $app->request();
+			$id = uniqid();
+            $fecha = date("Y-m-d");
+            $pp = "0";
 			$pedido = json_decode($request->getBody());
 			$sql = "INSERT INTO pedido (ped_id,ped_codigo,ped_fecha_creacion,ped_pagado,usuario_usu_id) VALUES (:ped_id,:ped_codigo,:ped_fecha_creacion,:ped_pagado,:usuario_usu_id)";
 			try{
 				$db = getConnection();
 				$stmt = $db->prepare($sql);
-				$stmt->bindParam(':ped_id',$pedido->ped_id,PDO::PARAM_STR);
+				$stmt->bindParam(':ped_id',$id,PDO::PARAM_STR);
 				$stmt->bindParam(':ped_codigo',$pedido->ped_codigo,PDO::PARAM_STR);
-				$stmt->bindParam(':ped_fecha_creacion',$pedido->ped_fecha_creacion,PDO::PARAM_STR);
-				$stmt->bindParam(':ped_pagado',$pedido->ped_pagado,PDO::PARAM_STR);
+				$stmt->bindParam(':ped_fecha_creacion',$fecha,PDO::PARAM_STR);
+				$stmt->bindParam(':ped_pagado',$pp,PDO::PARAM_STR);
 				$stmt->bindParam(':usuario_usu_id',$pedido->usuario_usu_id,PDO::PARAM_STR);
 				$stmt->execute();
 				$pedido->ped_id = $db->lastInsertId();

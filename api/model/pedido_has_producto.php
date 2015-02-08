@@ -36,15 +36,31 @@ if(!defined("SPECIALCONSTANT")) die("Acceso Denegado");
 		// });
 
 		$app->get('/pedido/:id',function($id) use($app){
-			$sql = "SELECT * FROM pedido_has_producto WHERE pedido_ped_id = :id";
+			//$sql = "SELECT * FROM pedido_has_producto WHERE pedido_ped_id = :id";
+			$sql = "SELECT * FROM pedido_producto WHERE pedido_ped_id = :id";
 			try{
 				$db = getConnection();
 				$stmt = $db->prepare($sql);
 				$stmt->bindParam(':id',$id,PDO::PARAM_STR);
 				$stmt->execute();
-				$pedido_has_producto = $stmt->fetchObject();
+				$pedido_has_producto = $stmt->fetchAll(PDO::FETCH_OBJ);
 				$db = null;
-				echo json_encode($pedido_has_producto);
+				echo json_encode(array("productos" => $pedido_has_producto));
+			}catch(PDOException $e){
+				echo json_encode(array("error" => array("text" => $e->getMessage())));
+			}
+		});
+
+		$app->get('/total/:id',function($id) use($app){
+			$sql = "SELECT sum(pro_precio) total FROM pedido_producto WHERE pedido_ped_id = :id";
+			try{
+				$db = getConnection();
+				$stmt = $db->prepare($sql);
+				$stmt->bindParam(':id',$id,PDO::PARAM_STR);
+				$stmt->execute();
+				$total = $stmt->fetchObject();
+				$db = null;
+				echo json_encode(array("total" => $total));
 			}catch(PDOException $e){
 				echo json_encode(array("error" => array("text" => $e->getMessage())));
 			}

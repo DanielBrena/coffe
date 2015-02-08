@@ -4,12 +4,13 @@
   <meta charset="utf-8">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="mobile-web-app-capable" content="yes">
-  <title>My App</title>  
+  <title>El Zapotal</title>  
 
   <link rel="stylesheet" href="styles/app.css"/>
   <link rel="stylesheet" href="lib/onsen/css/onsenui.css">  
   <link rel="stylesheet" href="lib/onsen/css/onsen-css-components2.css">  
   <link rel="stylesheet" href="css/login.css">
+  <link rel="stylesheet" href="css/pedido.css">
 
   <script src="lib/onsen/js/angular/angular.js"></script>    
   <script src="lib/onsen/js/onsenui.js"></script>    
@@ -17,19 +18,33 @@
   <script>
     var module = ons.bootstrap();
 
-    module.controller('AppCtrl', function($scope) {
-      $scope.pageTitle = 'Page1';
-    });
-
+    
     
   </script>
   <script src="js/controller_login.js"></script>
   <script src="js/controller_admin.js"></script>
+  <script src="js/controller_cp.js"></script>
+  <script src="js/controller_ingrediente.js"></script>
+  <script src="js/controller_producto.js"></script>
 
 </head>
 <body ng-controller="Login">
   <ons-navigator ng-cloak var="page">
-    <ons-tabbar>
+  <ons-toolbar>
+        <div class="center">Inicio sesión</div>
+       
+      </ons-toolbar>
+
+      <div class="login-form">
+
+        <input type="text" ng-model="usuario.usu_usuario" class="text-input--underbar" placeholder="Usuario" value="">
+
+        <input type="password" ng-model="usuario.usu_contrasena" class="text-input--underbar" placeholder="Password" value="">
+        <br><br>
+        <ons-button modifier="large" ng-click="login()" class="login-button">Log In</ons-button>
+        
+      </div>
+    <!-- <ons-tabbar>
       <ons-tab page="codigo.html" active="true">
         <ons-icon icon="ion-home"></ons-icon>
         <span style="font-size: 14px">Código</span>
@@ -39,10 +54,10 @@
         <span style="font-size: 14px">Login</span>
       </ons-tab>
       
-    </ons-tabbar>
+    </ons-tabbar> -->
   </ons-navigator>
 
-<ons-template id="codigo.html">
+<!-- <ons-template id="codigo.html">
   <ons-page>
       <ons-toolbar>
         <div class="center">Cuenta</div>
@@ -60,8 +75,8 @@
 
   </ons-page>
 </ons-template>
-
-<ons-template ng-constroller="Login" var="var_login" id="login.html">
+ -->
+<!-- <ons-template ng-controller="Login" var="var_login" id="login.html">
   <ons-page>
       <ons-toolbar>
         <div class="center">Inicio sesión</div>
@@ -78,7 +93,7 @@
       </div>
 
   </ons-page>
-</ons-template>
+</ons-template> -->
   
  
 </body>

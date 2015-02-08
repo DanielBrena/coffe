@@ -3,7 +3,7 @@ if(!defined("SPECIALCONSTANT")) die("Acceso Denegado");
 
 	$app->group('/usuario', function() use($app){
 		$app->response->headers->set('Content-type','application/json');
-		
+		$app->response->header('Access-Control-Allow-Origin','*');
 
 		$app->get('/all', function() use($app){
 			$sql = "SELECT * FROM usuario";
@@ -13,6 +13,27 @@ if(!defined("SPECIALCONSTANT")) die("Acceso Denegado");
 				$usuarios = $smt->fetchAll(PDO::FETCH_OBJ);
 				$db = null;
 				echo json_encode(array("usuarios" => $usuarios));
+			}
+			catch(PDOException $e){
+				echo json_encode(array("error" => array("text" => $e->getMessage())));
+			}
+		});
+
+		$app->post('/login',function() use($app){
+            $request = $app->request();
+			$usuario = json_decode($request->getBody());
+            
+			$sql = "SELECT * FROM usuario WHERE usu_usuario = :usuario AND usu_contrasena = :contrasena";
+			try{
+				$db = getConnection();
+				$stmt = $db->prepare($sql);
+				$stmt->bindParam(':usuario',$usuario->usu_usuario,PDO::PARAM_STR);
+                $stmt->bindParam(':contrasena',$usuario->usu_contrasena,PDO::PARAM_STR);
+				$stmt->execute();
+                $usuario = $stmt->fetchObject();
+                $isValid = $stmt->rowCount();
+				$db = null;
+				echo json_encode(array("login"=> $isValid,"usuario"=>$usuario));
 			}
 			catch(PDOException $e){
 				echo json_encode(array("error" => array("text" => $e->getMessage())));
