@@ -3,6 +3,7 @@ module.controller('Admin',function($scope,$http){
     $scope.pedidos = {};
     $scope.productos = {};
     $scope.total;
+    $scope.todos_productos = {};
 
     $scope.getAll = function(){
         
@@ -26,6 +27,18 @@ module.controller('Admin',function($scope,$http){
                 console.log(data);
             });
     }
+
+    $scope.getAllProductos = function(){
+        console.log("productos");
+        $http.get("http://localhost:8888/coffe/api/api/producto/all")
+            .success(function(data){
+                console.log(data);
+                $scope.todos_productos = data.productos;
+            })
+            .error(function(data){
+                console.log(data);
+            });
+    };
 
     $scope.getTotal = function(id){
       $http.get("http://localhost:8888/coffe/api/api/pedido_has_producto/total/"+id)

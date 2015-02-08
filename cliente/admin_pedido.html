@@ -84,8 +84,8 @@
             Cuenta
           </div>
           <div class="right">
-            <ons-toolbar-button>
-              <ons-icon icon="ion-plus" fixed-width="false" style="vertical-align: -4px;"></ons-icon>
+            <ons-toolbar-button ng-click="getAllProductos()">
+              <ons-icon icon="ion-plus" ng-click="show('pro.html')" fixed-width="false" style="vertical-align: -4px;"></ons-icon>
             </ons-toolbar-button>
           </div>
         </ons-toolbar>
@@ -134,4 +134,33 @@
 
       </ons-page>
     </ons-template>
+
+
+<ons-template ng-controller="Login" id="pro.html">
+    <ons-dialog var="dialog" cancelable>
+
+      <ons-toolbar inline>
+        <div class="center">
+          Productos {{todos_productos[0].pro_nombre}}
+        </div>
+      </ons-toolbar>
+
+      <div class="navigation-bar">
+        <div class="navigation-bar__center">
+            <input  type="search" class="search-input" style="width: 96%; margin: 6px auto 6px auto;" placeholder="Search">
+        </div>
+       </div>
+      
+      
+      <ons-list ng-repeat="p in todos_productos" style="overflow:scroll;height:300px;width:100%">
+       
+          <ons-list-item modifier="tappable">
+            {{p.pro_nombre}}
+          </ons-list-item>
+          
+        
+     </ons-list>
+    
+  </ons-dialog> 
+</ons-template>
 
