@@ -60,16 +60,16 @@ if(!defined("SPECIALCONSTANT")) die("Acceso Denegado");
 			}
 		});
 
-		$app->put('/update/:id/:val', function($id,$val) use($app){
+		$app->put('/update', function() use($app){
 
 			$request = $app->request();
 			$pedido = json_decode($request->getBody());
-			$sql = "UPDATE pedido SET ped_pagado = :val WHERE ped_id = :ped_id";
+			$sql = "UPDATE pedido SET ped_pagado = '1' WHERE ped_id = :ped_id";
 			try{
 				$db = getConnection();
 				$stmt = $db->prepare($sql);
-				$stmt->bindParam(':ped_pagado',$val,PDO::PARAM_STR);
-				$stmt->bindParam(':ped_id',$id,PDO::PARAM_STR);
+			//	$stmt->bindParam(':ped_pagado',$val,PDO::PARAM_STR);
+				$stmt->bindParam(':ped_id',$pedido->ped_id,PDO::PARAM_STR);
 				$stmt->execute();
 				$db = null;
 				echo json_encode($pedido);

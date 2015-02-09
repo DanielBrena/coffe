@@ -68,11 +68,13 @@ if(!defined("SPECIALCONSTANT")) die("Acceso Denegado");
 
 		$app->post('/add', function() use($app){
 			$request = $app->request();
+			$id = uniqid();
 			$pedido_has_producto = json_decode($request->getBody());
-			$sql = "INSERT INTO pedido_has_producto (pedido_ped_id,producto_pro_id,pp_estado) VALUES (:pedido_ped_id,:producto_pro_id,:pp_estado)";
+			$sql = "INSERT INTO pedido_has_producto (pp_id,pedido_ped_id,producto_pro_id,pp_estado) VALUES (:pp_id,:pedido_ped_id,:producto_pro_id,:pp_estado)";
 			try{
 				$db = getConnection();
 				$stmt = $db->prepare($sql);
+				$stmt->bindParam(':pp_id',$id,PDO::PARAM_STR);
 				$stmt->bindParam(':pedido_ped_id',$pedido_has_producto->pedido_ped_id,PDO::PARAM_STR);
 				$stmt->bindParam(':producto_pro_id',$pedido_has_producto->producto_pro_id,PDO::PARAM_STR);
 				$stmt->bindParam(':pp_estado',$pedido_has_producto->pp_estado,PDO::PARAM_STR);
@@ -84,17 +86,17 @@ if(!defined("SPECIALCONSTANT")) die("Acceso Denegado");
 			}
 		});
 
-		$app->put('/update/:id1/:id2/', function($id1,$id2) use($app){
+		$app->put('/update', function() use($app){
 
 			$request = $app->request();
 			$pedido_has_producto = json_decode($request->getBody());
-			$sql = "UPDATE pedido_has_producto SET pp_estado = :pp_estado WHERE pedido_ped_id = :pedido_ped_id AND producto_pro_id = :producto_pro_id";
+			$sql = "UPDATE pedido_has_producto SET pp_estado = '1' WHERE pp_id = :id ";
 			try{
 				$db = getConnection();
 				$stmt = $db->prepare($sql);
-				$stmt->bindParam(':pp_estado',$pedido_has_producto->pp_estado,PDO::PARAM_STR);
-				$stmt->bindParam(':pedido_ped_id',$pedido_has_producto->pedido_ped_id,PDO::PARAM_STR);
-				$stmt->bindParam(':producto_pro_id',$pedido_has_producto->producto_pro_id,PDO::PARAM_STR);
+				//$stmt->bindParam(':pp_estado',$pedido_has_producto->pp_estado,PDO::PARAM_STR);
+				$stmt->bindParam(':id',$pedido_has_producto->pp_id,PDO::PARAM_STR);
+				
 				$stmt->execute();
 				$db = null;
 				echo json_encode($pedido_has_producto);
@@ -103,13 +105,12 @@ if(!defined("SPECIALCONSTANT")) die("Acceso Denegado");
 			}
 		});
 
-		$app->delete('/delete/:id1/:id2',function($id1,$id2) use($app){
-			$sql = "DELETE FROM pedido_has_producto WHERE pedido_ped_id = :pedido_ped_id AND producto_pro_id = :producto_pro_id";
+		$app->delete('/delete/:id',function($id) use($app){
+			$sql = "DELETE FROM pedido_has_producto WHERE pp_id = :id";
 			try{
 				$db = getConnection();
 				$stmt = $db->prepare($sql);
-				$stmt->bindParam(':pedido_ped_id',$id1,PDO::PARAM_STR);
-				$stmt->bindParam(':producto_pro_id',$id2,PDO::PARAM_STR);
+				$stmt->bindParam(':id',$id,PDO::PARAM_STR);
 				$stmt->execute();
 				$db = null;
 			}catch(PDOException $e){

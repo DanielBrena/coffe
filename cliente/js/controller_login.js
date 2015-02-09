@@ -45,7 +45,7 @@ module.controller('Login',function($scope,$http,$window){
             });
     };
 
-     $scope.getAllProductos = function(){
+    /* $scope.getAllProductos = function(){
         console.log("productos");
         $http.get("http://localhost:8888/coffe/api/api/producto/all")
             .success(function(data){
@@ -56,7 +56,7 @@ module.controller('Login',function($scope,$http,$window){
                 console.log(data);
             });
     };
-    
+    */
 
 	$scope.logout = function(){
         page.popPage();   
