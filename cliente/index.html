@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en"  >
+<head>
+  <meta charset="utf-8">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <title>El Zapotal</title>  
+
+  <link rel="stylesheet" href="styles/app.css"/>
+  <link rel="stylesheet" href="lib/onsen/css/onsenui.css">  
+  <link rel="stylesheet" href="lib/onsen/css/onsen-css-components2.css">  
+  <link rel="stylesheet" href="css/login.css">
+  <link rel="stylesheet" href="css/pedido.css">
+
+  <script src="lib/onsen/js/angular/angular.js"></script>    
+  <script src="lib/onsen/js/onsenui.js"></script>    
+  <script src="js/app.js"></script>
+  <script src="js/config.js"></script>
+  
+  <script src="js/controller_login.js"></script>
+  
+
+</head>
+<body  >
+  <ons-navigator ng-cloak var="page">
+  <ons-toolbar>
+        <div class="center">Inicio sesión</div>
+       
+      </ons-toolbar>
+
+      <div class="login-form" ng-controller="Login">
+
+        <input type="text" ng-model="usuario.usu_usuario" class="text-input--underbar" placeholder="Usuario" value="">
+
+        <input type="password" ng-model="usuario.usu_contrasena" class="text-input--underbar" placeholder="Contraseña" value="">
+        <br><br>
+        <ons-button modifier="large" ng-click="logout()" class="login-button">Log In</ons-button>
+        
+      </div>
+ 
+  </ons-navigator>
+
+
+ 
+</body>
+</html>
