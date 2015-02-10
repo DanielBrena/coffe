@@ -52,7 +52,7 @@ if(!defined("SPECIALCONSTANT")) die("Acceso Denegado");
 				$stmt->bindParam(':ped_pagado',$pp,PDO::PARAM_STR);
 				$stmt->bindParam(':usuario_usu_id',$pedido->usuario_usu_id,PDO::PARAM_STR);
 				$stmt->execute();
-				$pedido->ped_id = $db->lastInsertId();
+				$pedido->ped_id = $id;
 				$db = null;
 				echo json_encode($pedido);
 			}catch(PDOException $e){

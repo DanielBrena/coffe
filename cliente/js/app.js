@@ -1,3 +1,3 @@
 (function(){
-  var app = angular.module('myApp', ['onsen']);
+  var app = angular.module('Coffe', ['onsen']);
 })();

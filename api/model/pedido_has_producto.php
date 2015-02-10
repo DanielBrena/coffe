@@ -80,6 +80,7 @@ if(!defined("SPECIALCONSTANT")) die("Acceso Denegado");
 				$stmt->bindParam(':pp_estado',$pedido_has_producto->pp_estado,PDO::PARAM_STR);
 				$stmt->execute();
 				$db = null;
+				
 				echo json_encode($pedido_has_producto);
 			}catch(PDOException $e){
 				echo json_encode(array("error" => array("text" => $e->getMessage()))); 
