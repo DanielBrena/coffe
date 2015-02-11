@@ -1,4 +1,87 @@
-module.controller('Admin',function($scope,$http){
+module.controller('Admin',function($scope,ServicePedido,$window){
+    $scope.pedidos = {};
+    $scope.pedido = {};
+
+    $scope.pedido_all = function(){
+        ServicePedido.all().success(function(data){
+            $scope.pedidos = data.pedidos;
+        });
+    }
+
+    $scope.pedido_all();
+
+    $scope.pedido_add = function(pedido){
+      pedido.usuario_usu_id = $window.localStorage.getItem("usuario");
+      ServicePedido.add(pedido).success(function(data){
+        alerta("Se creo un pedido");
+        $scope.pedido_all();
+
+      });
+    }
+
+    $scope.pedido_productos = function(id){
+      ServicePedido.loadProductosId(id).success(function(data){
+        $window.localStorage.setItem("pedido", id);
+        pedido_total(id);
+        var_pedido.pushPage("pedido_productos.html",{animation:"slide"});
+      });
+    
+    }
+
+    $scope.pedido_findLike = function(){
+      console.log($scope.pedido.busqueda);
+      if($scope.pedido.busqueda != "" ){
+        ServicePedido.findLike($scope.pedido.busqueda).success(function(data){
+          $scope.pedidos = data.pedidos;
+        });
+      }else{
+          $scope.pedido_all();
+      }
+    }
+
+    $scope.pedido_delete = function(id){
+      ons.notification.confirm({
+          message: '¿ Deseas eliminar el pedido ?',
+          callback: function(idx) {
+            switch(idx) {
+             
+              case 1:
+                   ServicePedido.delete(id).success(function(data){
+                      $scope.pedido_all();
+                    });
+                break;
+            }
+          }
+        });
+    }
+
+    $scope.pedido_deletePedidoStorage = function(){
+        $window.localStorage.removeItem("pedido");
+    }
+
+    function pedido_total(id){
+      ServicePedido.total(id).success(function(data){
+        $scope.total = data.total;
+      });
+    }
+
+    function alerta(m){
+      ons.notification.alert({message: m});
+    }
+
+    $scope.pedido_pagar = function(pedido){
+      ServicePedido.pagar(pedido).success(function(data){
+        $scope.pedido_all();
+      });
+    }
+
+
+
+
+});
+
+
+/*module.controller('Admin',function($scope,$http){
     $scope.url = "http://localhost:8888/coffe/api/api/pedido/";
     $scope.pedidos = {};
     $scope.pedido = {};
@@ -69,10 +152,8 @@ module.controller('Admin',function($scope,$http){
       pedido_has_producto.pp_id = pp_id;
       $http.put("http://localhost:8888/coffe/api/api/pedido_has_producto/update",pedido_has_producto)
             .success(function(data){
-               //$scope.cp.cp_id = data.cp_id;
                 $scope.getAllProducto($scope.pedido.ped_id);
-                //$scope.getTotal($scope.pedido.ped_id);
-                //$scope.btn_visible = "block";
+
 
             })
             .error(function(data){
@@ -85,10 +166,7 @@ module.controller('Admin',function($scope,$http){
       pedido_.ped_id = ped_id;
       $http.put("http://localhost:8888/coffe/api/api/pedido/update",pedido_)
             .success(function(data){
-               //$scope.cp.cp_id = data.cp_id;
                 $scope.getAll();
-                //$scope.getTotal($scope.pedido.ped_id);
-                //$scope.btn_visible = "block";
 
             })
             .error(function(data){
@@ -115,10 +193,8 @@ module.controller('Admin',function($scope,$http){
      
       $http.post("http://localhost:8888/coffe/api/api/pedido_has_producto/add",pedido_has_producto)
             .success(function(data){
-               //$scope.cp.cp_id = data.cp_id;
                 $scope.getAllProducto(localStorage.getItem("pedido_id"));
                 $scope.getTotal(localStorage.getItem("pedido_id"));
-                //$scope.btn_visible = "block";
 
             })
             .error(function(data){
@@ -183,7 +259,6 @@ module.controller('Admin',function($scope,$http){
       
       var_pedido.pushPage("schedule.html",{animation:"slide"});
       localStorage.setItem("pedido_id",id);
-      //$scope.pedido.ped_id = id;
     }
 
-});
+});*/

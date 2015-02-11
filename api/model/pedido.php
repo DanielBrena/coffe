@@ -36,6 +36,23 @@ if(!defined("SPECIALCONSTANT")) die("Acceso Denegado");
 			}
 		});
 
+		$app->get('/like/:like', function($like) use($app){
+			$sql = "SELECT * FROM pedido WHERE ped_codigo like :like";
+			try{
+				$db = getConnection();
+				$stmt = $db->prepare($sql);
+                $like = "%".$like."%";
+                $stmt->bindParam(':like',$like,PDO::PARAM_STR);
+				$stmt->execute();
+				$pedidos = $stmt->fetchAll(PDO::FETCH_OBJ);
+				$db = null;
+				echo json_encode(array("pedidos" => $pedidos));
+			}
+			catch(PDOException $e){
+				echo json_encode(array("error" => array("text" => $e->getMessage())));
+			}
+		});
+
 		$app->post('/add', function() use($app){
 			$request = $app->request();
 			$id = uniqid();
@@ -68,7 +85,6 @@ if(!defined("SPECIALCONSTANT")) die("Acceso Denegado");
 			try{
 				$db = getConnection();
 				$stmt = $db->prepare($sql);
-			//	$stmt->bindParam(':ped_pagado',$val,PDO::PARAM_STR);
 				$stmt->bindParam(':ped_id',$pedido->ped_id,PDO::PARAM_STR);
 				$stmt->execute();
 				$db = null;

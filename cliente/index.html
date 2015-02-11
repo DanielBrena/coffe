@@ -18,6 +18,8 @@
   <script src="js/config.js"></script>
   
   <script src="js/controller_login.js"></script>
+  <script src="js/services.js"></script>
+  <script src="js/controller_admin.js"></script>
   
 
 </head>
@@ -34,7 +36,7 @@
 
         <input type="password" ng-model="usuario.usu_contrasena" class="text-input--underbar" placeholder="Contraseña" value="">
         <br><br>
-        <ons-button modifier="large" ng-click="logout()" class="login-button">Log In</ons-button>
+        <ons-button modifier="large" ng-click="login(usuario)" class="login-button">Log In</ons-button>
         
       </div>
  
