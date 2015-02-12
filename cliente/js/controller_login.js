@@ -32,10 +32,7 @@ module.controller('Login',function($scope,ServiceLogin,$window){
         });  
     }
 
-    $scope.logout = function(){
-        page.popPage();
-        $window.localStorage.removeItem("usuario");
-    }
+   
 
     function alert() {
         ons.notification.alert({message: 'Correo o Contraseña incorrecta'});

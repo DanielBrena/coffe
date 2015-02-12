@@ -2,7 +2,7 @@
   <ons-page>
         <ons-toolbar>
         	<div class="left">
-            <ons-toolbar-button><ons-icon icon="ion-log-out" ng-click="logout()" style="vertical-align: -4px; font-size: 28px;"></ons-icon></ons-toolbar-button>
+            <ons-toolbar-button><ons-icon icon="ion-log-out"  ng-click="logout()" style="vertical-align: -4px; font-size: 28px;"></ons-icon></ons-toolbar-button>
           </div>
 
           <div class="center">Pedido</div>
@@ -94,7 +94,7 @@
           </div>
           <div class="right">
             <ons-toolbar-button>
-              <ons-icon icon="ion-plus" ng-click="getAllProductos()" fixed-width="false" style="vertical-align: -4px;"></ons-icon>
+              <ons-icon icon="ion-plus" ng-click="producto_event()" fixed-width="false" style="vertical-align: -4px;"></ons-icon>
             </ons-toolbar-button>
           </div>
         </ons-toolbar>
@@ -112,12 +112,12 @@
         </div>
 
         <ons-list class="plan-list">
-          <ons-list-item modifier="chevron" class="plan" ng-repeat="p in productos">
+          <ons-list-item modifier="chevron" class="plan" ng-repeat="p in productos_pedido">
 
-          <ons-gesture-detector ng-doubletap="delete(p.pp_id)">
+          <ons-gesture-detector ng-hold="producto_eliminar(p.pp_id)">
             <ons-row id="detect-area">
 
-              <ons-col width="80px" ng-click="entregar(p.pp_id)" class="plan-left">
+              <ons-col width="80px" ng-click="producto_entregar(p.pp_id)" class="plan-left">
                 <div class="plan-date">$ {{p.pro_precio}}</div>
                 <div class="plan-duration">{{p.pp_estado == 0 ? "No entregado" : "Entregado"}}</div>
               </ons-col>
@@ -151,7 +151,7 @@
       </ons-page>
     </ons-template>
 
-<ons-template ng-controller="Admin" id="addProducto.html">
+<ons-template ng-controller="Admin" id="producto_add.html">
   <ons-page >
       <ons-toolbar>
         <div class="left"><ons-back-button ng-click="">Back</ons-back-button></div>
@@ -162,15 +162,15 @@
 
           <div class="navigation-bar__center">
 
-            <input ng-keyup="findLike()"  ng-model="producto.busqueda"  type="search" class="search-input" style="width: 96%; margin: 6px auto 6px auto;" placeholder="Search">
+            <input ng-keyup="producto_findLike()"  ng-model="producto.busqueda"  type="search" class="search-input" style="width: 96%; margin: 6px auto 6px auto;" placeholder="Search">
 
           </div>
         </div>
 
-      <ons-list ng-repeat="c in todos_productos">
+      <ons-list ng-repeat="p in productos">
 
-        <ons-list-item ng-click="add(c.pro_id)" class="list__item--tappable list__item__line-height" modifier="chevron">
-        {{c.pro_nombre}}
+        <ons-list-item ng-click="producto_add(p.pro_id)" class="list__item--tappable list__item__line-height" modifier="chevron">
+        {{p.pro_nombre}}
             <div >
             
             </div>

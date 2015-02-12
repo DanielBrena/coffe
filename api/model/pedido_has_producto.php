@@ -69,6 +69,7 @@ if(!defined("SPECIALCONSTANT")) die("Acceso Denegado");
 		$app->post('/add', function() use($app){
 			$request = $app->request();
 			$id = uniqid();
+			$estado = "0";
 			$pedido_has_producto = json_decode($request->getBody());
 			$sql = "INSERT INTO pedido_has_producto (pp_id,pedido_ped_id,producto_pro_id,pp_estado) VALUES (:pp_id,:pedido_ped_id,:producto_pro_id,:pp_estado)";
 			try{
@@ -77,7 +78,7 @@ if(!defined("SPECIALCONSTANT")) die("Acceso Denegado");
 				$stmt->bindParam(':pp_id',$id,PDO::PARAM_STR);
 				$stmt->bindParam(':pedido_ped_id',$pedido_has_producto->pedido_ped_id,PDO::PARAM_STR);
 				$stmt->bindParam(':producto_pro_id',$pedido_has_producto->producto_pro_id,PDO::PARAM_STR);
-				$stmt->bindParam(':pp_estado',$pedido_has_producto->pp_estado,PDO::PARAM_STR);
+				$stmt->bindParam(':pp_estado',$estado,PDO::PARAM_STR);
 				$stmt->execute();
 				$db = null;
 				
