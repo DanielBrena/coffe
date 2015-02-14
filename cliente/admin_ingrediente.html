@@ -6,7 +6,7 @@
       <div class="center">Ingrediente</div>
 
       <div class='right'>
-          <ons-toolbar-button ng-click="newIngrediente()">
+          <ons-toolbar-button ng-click="ingrediente_event()">
             <ons-icon icon="ion-compose" onclick="var_ingrediente.pushPage('crear.html', { animation : 'lift' } )"  fixed-width="false" style="font-size: 32px; width: 1em;"></ons-icon>
           </ons-toolbar-button>
       </div>
@@ -16,25 +16,20 @@
 
           <div class="navigation-bar__center">
 
-            <input ng-keyup="findLike()"  ng-model="ingrediente.busqueda"  type="search" class="search-input" style="width: 96%; margin: 6px auto 6px auto;" placeholder="Search">
+            <input ng-keyup="ingrediente_findLike()"  ng-model="ingrediente.busqueda"  type="search" class="search-input" style="width: 96%; margin: 6px auto 6px auto;" placeholder="Search">
 
           </div>
         </div>
 
-      <!-- <ons-list-item>
-
-          
-          <input ng-keyup="findLike()"  ng-model="categoria.busqueda" type="search" class="text-input text-input--transparent" style='margin-top:8px; width: 100%'; placeholder="Search"></input>
-
-      </ons-list-item> -->
-
-      <ons-list ng-repeat="c in ingredientes">
-        <ons-list-item ng-click="loadId(c.ing_id)" class="list__item--tappable list__item__line-height" modifier="chevron">
-        {{c.ing_nombre}}
-            <div >
-            
-            </div>
-        </ons-list-item>
+      <ons-list ng-repeat="i in ingredientes">
+        <ons-gesture-detector ng-hold="ingrediente_delete(i.ing_id)">
+            <ons-list-item ng-click="ingrediente_loadId(i.ing_id)" class="list__item--tappable list__item__line-height" modifier="chevron">
+            {{i.ing_nombre}}
+                <div >
+                
+                </div>
+            </ons-list-item>
+        <ons-gesture-detector>
         
       </ons-list>
 
@@ -101,12 +96,12 @@
        
        
       <ons-list-item>
-          <ons-button ng-click="add()" modifier="large">Guardar</ons-button>
+          <ons-button ng-click="ingrediente_add()" modifier="large">Guardar</ons-button>
         </ons-list-item>
-        
+       <!--  
         <ons-list-item>
           <ons-button style="display:{{btn_visible}}" ng-click="delete()" modifier="large--cta">Eliminar</ons-button>
-        </ons-list-item>
+        </ons-list-item> -->
 
         
   </ons-page>

@@ -1,0 +1,73 @@
+
+<ons-navigator title="Categoria Entradas" var="var_categoria_entrada" ng-controller="CategoriaEntrada">
+    <ons-page   >
+      <ons-toolbar>
+      
+      <div class="center">Categoria Entradas</div>
+
+      <div class='right'>
+          <ons-toolbar-button ng-click="categoria_entrada_event()">
+            <ons-icon icon="ion-compose" onclick="var_categoria_entrada.pushPage('crear.html', { animation : 'lift' } )"  fixed-width="false" style="font-size: 32px; width: 1em;"></ons-icon>
+          </ons-toolbar-button>
+      </div>
+    </ons-toolbar>
+
+      <div class="navigation-bar">
+
+          <div class="navigation-bar__center">
+
+            <input ng-keyup="categoria_entrada_findLike()"  ng-model="categoria_entrada.busqueda"  type="search" class="search-input" style="width: 96%; margin: 6px auto 6px auto;" placeholder="Search">
+
+          </div>
+        </div>
+
+      <ons-list ng-repeat="c in categoria_entradas">
+        <ons-gesture-detector ng-hold="categoria_entrada_delete(c.ce_id)">
+          <ons-list-item ng-click="categoria_entrada_loadId(c.ce_id)" class="list__item--tappable list__item__line-height" modifier="chevron">
+          {{c.ce_nombre}}
+              <div >
+              
+              </div>
+          </ons-list-item>
+        <ons-gesture-detector>        
+      </ons-list>
+
+      
+
+    </ons-page>
+  </ons-navigator>
+
+
+
+<ons-template id="crear.html">
+  <ons-page >
+    <ons-toolbar>
+      <div class="left"><ons-back-button ng-click="">Back</ons-back-button></div>
+      <div class="center">Crear</div>
+    </ons-toolbar>
+
+    
+    <ons-list>
+        
+          <input type="hidden" ng-model="categoria_entrada.ce_id"  placeholder="ID" class="text-input text-input--transparent" style="margin-top:8px; width: 100%;">
+        
+
+        <ons-list-item>
+          <input type="text" ng-model="categoria_entrada.ce_nombre" placeholder="Nombre" class="text-input text-input--transparent" style="margin-top:8px; width: 100%;font-size:1em">
+        </ons-list-item>
+
+        <ons-list-item>
+        <textarea class="textarea textarea--transparent" ng-model="categoria_entrada.ce_descripcion"  placeholder="Descripcion" id="my-textarea" style="margin-top:8px; width: 100%;font-size:1em"></textarea>
+         
+        </ons-list-item>
+
+       
+       
+      <ons-list-item>
+          <ons-button ng-click="categoria_entrada_add()" modifier="large">Guardar</ons-button>
+        </ons-list-item>
+        
+        
+        
+  </ons-page>
+</ons-template>

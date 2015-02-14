@@ -3,7 +3,7 @@ if(!defined("SPECIALCONSTANT")) die("Acceso Denegado");
 
 	$app->group('/ingrediente', function() use($app){
 		$app->response->headers->set('Content-type','application/json');
-		
+		$app->response->header('Access-Control-Allow-Origin','*');
 
 		$app->get('/all', function() use($app){
 			$sql = "SELECT * FROM ingrediente";
@@ -76,7 +76,7 @@ if(!defined("SPECIALCONSTANT")) die("Acceso Denegado");
 			}
 		});
 
-		$app->put('/update/:id', function($id) use($app){
+		$app->put('/update', function() use($app){
 
 			$request = $app->request();
 			$ingrediente = json_decode($request->getBody());
@@ -85,7 +85,7 @@ if(!defined("SPECIALCONSTANT")) die("Acceso Denegado");
 			try{
 				$db = getConnection();
 				$stmt = $db->prepare($sql);
-				$stmt->bindParam(':ing_id',$id,PDO::PARAM_STR);
+				$stmt->bindParam(':ing_id',$ingrediente->ing_id,PDO::PARAM_STR);
 				$stmt->bindParam(':ing_nombre',$ingrediente->ing_nombre,PDO::PARAM_STR);
 				$stmt->bindParam(':ing_descripcion',$ingrediente->ing_descripcion,PDO::PARAM_STR);
 				$stmt->bindParam(':ing_img',$ingrediente->ing_img,PDO::PARAM_STR);

@@ -19,9 +19,17 @@ app.service("ServiceURL",function(){
     this.categoria_producto = function(){
     	return url + "categoria_producto";
     };
+    
+    this.categoria_entrada = function(){
+        return url + "categoria_entrada";
+    };
 
     this.producto = function(){
     	return url + "producto";
+    };
+
+    this.entrada = function(){
+        return url + "entrada";
     };
 
     this.pedido_has_producto = function(){
@@ -30,6 +38,9 @@ app.service("ServiceURL",function(){
 
     this.usuario = function(){
     	return url + "usuario";
+    },
+    this.estadistica = function(){
+        return url + "estadistica";
     }
 
 

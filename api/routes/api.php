@@ -11,11 +11,15 @@ $app->group('/api',function() use($app){
 	
 	require "model/usuario.php";
 	require "model/categoria_producto.php";
+	require "model/categoria_entrada.php";
 	require "model/ingrediente.php";
 	require "model/producto.php";
+	require "model/entrada.php";
 	require "model/producto_has_ingrediente.php";
 	require "model/pedido.php";
 	require "model/pedido_has_producto.php";
+	require "model/estadistica.php";
+
 
 });
  ?>

@@ -3,7 +3,7 @@ if(!defined("SPECIALCONSTANT")) die("Acceso Denegado");
 
 	$app->group('/producto', function() use($app){
 		$app->response->headers->set('Content-type','application/json');
-		
+		$app->response->header('Access-Control-Allow-Origin','*');
 
 		$app->get('/all', function() use($app){
 			$sql = "SELECT * FROM producto";
@@ -80,7 +80,7 @@ if(!defined("SPECIALCONSTANT")) die("Acceso Denegado");
 		});
 		
 		//falta where
-		$app->put('/update/:id', function($id) use($app){
+		$app->put('/update', function() use($app){
 
 			$request = $app->request();
 			$producto = json_decode($request->getBody());
@@ -88,7 +88,7 @@ if(!defined("SPECIALCONSTANT")) die("Acceso Denegado");
 			try{
 				$db = getConnection();
 				$stmt = $db->prepare($sql);
-				$stmt->bindParam(':pro_id',$id,PDO::PARAM_STR);
+				$stmt->bindParam(':pro_id',$producto->pro_id,PDO::PARAM_STR);
 				$stmt->bindParam(':pro_nombre',$producto->pro_nombre,PDO::PARAM_STR);
 				$stmt->bindParam(':pro_descripcion',$producto->pro_descripcion,PDO::PARAM_STR);
 				$stmt->bindParam(':pro_img',$producto->pro_img,PDO::PARAM_STR);

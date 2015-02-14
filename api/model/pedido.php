@@ -7,7 +7,7 @@ if(!defined("SPECIALCONSTANT")) die("Acceso Denegado");
 
 
 		$app->get('/all', function() use($app){
-			$sql = "SELECT * FROM pedido";
+			$sql = "SELECT * FROM pedido order by ped_id desc";
 			try{
 				$db = getConnection();
 				$smt = $db->query($sql);

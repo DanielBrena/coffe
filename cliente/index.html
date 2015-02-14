@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="lib/onsen/css/onsen-css-components2.css">  
   <link rel="stylesheet" href="css/login.css">
   <link rel="stylesheet" href="css/pedido.css">
+  <link rel="stylesheet" type="text/css" href="css/estadistica.css">
 
   <script src="lib/onsen/js/angular/angular.js"></script>    
   <script src="lib/onsen/js/onsenui.js"></script>    
@@ -20,8 +21,15 @@
   <script src="js/controller_login.js"></script>
   <script src="js/services.js"></script>
   <script src="js/controller_admin.js"></script>
+  <script src="js/controller_ingrediente.js"></script>
+  <script src="js/controller_producto.js"></script>
+  <script src="js/controller_entrada.js"></script>
+  <script src="js/controller_categoria_producto.js"></script>
+  <script src="js/controller_categoria_entrada.js"></script>
   
-
+  <script src="js/Chart.js"></script>
+  <script src="js/controller_estadistica.js"></script>
+  
 </head>
 <body  >
   <ons-navigator ng-cloak var="page">
@@ -36,7 +44,7 @@
 
         <input type="password" ng-model="usuario.usu_contrasena" class="text-input--underbar" placeholder="Contraseña" value="">
         <br><br>
-        <ons-button modifier="large" ng-click="login(usuario)" class="login-button">Log In</ons-button>
+        <ons-button modifier="large" ng-click="login(usuario)" class="login-button">Entrar</ons-button>
         
       </div>
  

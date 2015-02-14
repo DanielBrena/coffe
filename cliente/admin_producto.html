@@ -6,7 +6,7 @@
       <div class="center">Producto</div>
 
       <div class='right'>
-          <ons-toolbar-button ng-click="newProducto()">
+          <ons-toolbar-button ng-click="producto_event()">
             <ons-icon icon="ion-compose" onclick="var_producto.pushPage('crear.html', { animation : 'lift' } )"  fixed-width="false" style="font-size: 32px; width: 1em;"></ons-icon>
           </ons-toolbar-button>
       </div>
@@ -16,7 +16,7 @@
 
           <div class="navigation-bar__center">
 
-            <input ng-keyup="findLike()"  ng-model="producto.busqueda"  type="search" class="search-input" style="width: 96%; margin: 6px auto 6px auto;" placeholder="Search">
+            <input ng-keyup="producto_findLike()"  ng-model="producto.busqueda"  type="search" class="search-input" style="width: 96%; margin: 6px auto 6px auto;" placeholder="Search">
 
           </div>
         </div>
@@ -28,13 +28,15 @@
 
       </ons-list-item> -->
 
-      <ons-list ng-repeat="c in productos">
-        <ons-list-item ng-click="loadId(c.pro_id)" class="list__item--tappable list__item__line-height" modifier="chevron">
-        {{c.pro_nombre}}
-            <div >
-            
-            </div>
-        </ons-list-item>
+      <ons-list ng-repeat="p in productos">
+          <ons-gesture-detector ng-hold="producto_delete(p.pro_id)">
+            <ons-list-item ng-click="producto_loadId(p.pro_id)" class="list__item--tappable list__item__line-height" modifier="chevron">
+            {{p.pro_nombre}}
+                <div >
+                
+                </div>
+            </ons-list-item>
+          <ons-gesture-detector>
         
       </ons-list>
 
@@ -129,7 +131,7 @@
 
         <ons-list-item>
 
-          <select ng-init="foo = foo || model[0]" style="margin-top:8px;width:100%;font-size:1em" ng-model="producto.categoria_producto_cp_id" ng-options="model.cp_id as model.cp_nombre for model in categorias">
+        <select ng-init="foo = foo || cp[0]" style="margin-top:8px;width:100%;font-size:1em" ng-model="producto.categoria_producto_cp_id" ng-options="cp.cp_id as cp.cp_nombre for cp in categoria_productos">
             <option value="" ng-if="foo">Selecciona uno.</option>
           </select>
         </ons-list-item>
@@ -137,12 +139,10 @@
        
        
       <ons-list-item>
-          <ons-button ng-click="add()" modifier="large">Guardar</ons-button>
+          <ons-button ng-click="producto_add()" modifier="large">Guardar</ons-button>
         </ons-list-item>
         
-        <ons-list-item>
-          <ons-button style="display:{{btn_visible}}" ng-click="delete()" modifier="large--cta">Eliminar</ons-button>
-        </ons-list-item>
+        
 
         
   </ons-page>

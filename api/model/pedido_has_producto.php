@@ -3,7 +3,7 @@ if(!defined("SPECIALCONSTANT")) die("Acceso Denegado");
 
 	$app->group('/pedido_has_producto', function() use($app){
 		$app->response->headers->set('Content-Type','application/json');
-		
+		$app->response->header('Access-Control-Allow-Origin','*');
 
 		$app->get('/all', function() use($app){
 			$sql = "SELECT * FROM pedido_has_producto";

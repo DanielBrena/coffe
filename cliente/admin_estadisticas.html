@@ -1,0 +1,60 @@
+
+<ons-navigator title="Estadisticas" var="var_estadistica" ng-controller="Estadistica">
+    <ons-page   >
+      <ons-toolbar>
+      
+      <div class="center">Estadisticas</div>
+
+      
+    </ons-toolbar>
+      
+      <div class="estadistica">
+        <div class="navigation-bar titulo_estadistica">
+
+            <label >Ventas Mensuales.</label>
+        </div>
+
+        <div style="width: 100%">
+          <canvas id="mensual" max-height="200px" width="100%"></canvas>
+        </div>
+
+      </div>
+      
+      <div class="estadistica">
+        <div class="navigation-bar titulo_estadistica">
+
+            <label >Ventas Semanales.</label>
+        </div>
+
+        <div style="width: 100%">
+          <canvas id="semanal" max-height="200px" width="100%"></canvas>
+        </div>
+      </div>
+
+      <div class="estadistica">
+        <div class="navigation-bar titulo_estadistica">
+
+            <label >Ventas Anuales.</label>
+        </div>
+
+        <div style="width: 100%">
+          <canvas id="anual" max-height="200px" width="100%"></canvas>
+        </div>
+      </div>
+      
+      <div class="estadistica">
+        <div class="navigation-bar titulo_estadistica">
+    
+          <label >Productos Vendidos Mensualmente.</label>
+            
+        </div>
+        
+        <div style="width: 100%">
+          <canvas id="producto_mensual" max-height="200px" width="100%"></canvas>
+        </div>
+      </div>
+      
+
+    </ons-page>
+  </ons-navigator>
+

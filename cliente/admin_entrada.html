@@ -1,0 +1,100 @@
+
+<ons-navigator title="Entrada" var="var_entrada" ng-controller="Entrada">
+    <ons-page   >
+      <ons-toolbar>
+      
+      <div class="center">Entrada</div>
+
+      <div class='right'>
+          <ons-toolbar-button ng-click="entrada_event()">
+            <ons-icon icon="ion-compose" onclick="var_entrada.pushPage('crear.html', { animation : 'lift' } )"  fixed-width="false" style="font-size: 32px; width: 1em;"></ons-icon>
+          </ons-toolbar-button>
+      </div>
+    </ons-toolbar>
+
+      <div class="navigation-bar">
+
+          <div class="navigation-bar__center">
+
+            <input ng-keyup="entrada_findLike()"  ng-model="entrada.busqueda"  type="search" class="search-input" style="width: 96%; margin: 6px auto 6px auto;" placeholder="Search">
+
+          </div>
+      </div>
+
+
+      <ons-list ng-repeat="e in entradas">
+          <ons-gesture-detector ng-hold="entrada_delete(e.ent_id)">
+            <ons-list-item ng-click="entrada_loadId(e.ent_id)" class="list__item--tappable list__item__line-height" modifier="chevron">
+            {{e.ce_nombre}} : <span style="color: rgb(235, 94, 47);"> $ {{e.ent_valor}} </span>
+                
+                <div style="color:rgb(152, 152, 152);">
+                  {{e.ent_fecha_creacion}}
+                </div>
+            </ons-list-item>
+          <ons-gesture-detector>
+        
+      </ons-list>
+
+      
+
+    </ons-page>
+  </ons-navigator>
+
+
+
+<ons-template id="crear.html">
+  <ons-page >
+    <ons-toolbar>
+      <div class="left"><ons-back-button ng-click="">Back</ons-back-button></div>
+      <div class="center">Crear</div>
+    </ons-toolbar>
+
+    
+    <ons-list>
+        
+        <input type="hidden" ng-model="entrada.ent_id"  placeholder="ID" class="text-input text-input--transparent" style="margin-top:8px; width: 100%;">
+        
+        <!-- <ons-list-item> -->
+
+         <!--  <select ng-init="foo = foo || model[0]" style="margin-top:8px;width:100%;font-size:1em" ng-model="entrada.categoria_entrada_ce_id" ng-options="model.ce_id as model.ce_nombre for model in categoria_entradas">
+            <option value="" ng-if="foo">Selecciona uno.</option>
+          </select> -->
+
+          <!-- <select style="margin-top:8px;width:100%;font-size:1em" ng-model="entrada.categoria_entrada_ce_id" >
+            
+             <option ng-repeat="ce in categoria_entradas" value="{{ce.ce_id}}">{{ce.ce_nombre}}</option>
+
+          </select> -->
+
+        <!-- </ons-list-item> -->
+        
+        <ons-list-item>
+
+        <select ng-init="foo = foo || ce[0]" style="margin-top:8px;width:100%;font-size:1em" ng-model="entrada.categoria_entrada_ce_id" ng-options="ce.ce_id as ce.ce_nombre for ce in categoria_entradas">
+            <option value="" ng-if="foo">Selecciona uno.</option>
+          </select>
+        </ons-list-item>
+        
+        
+        <ons-list-item>
+          <input type="number" ng-model="entrada.ent_valor"  placeholder="Valor" class="number-input number-input--transparent" style="border:none; margin-top:8px; width: 100%;font-size:1em" min="0"  step=".5">
+        </ons-list-item>
+
+
+        
+
+        
+
+        
+
+       
+       
+      <ons-list-item>
+          <ons-button ng-click="entrada_add()" modifier="large">Guardar</ons-button>
+        </ons-list-item>
+        
+        
+
+        
+  </ons-page>
+</ons-template>

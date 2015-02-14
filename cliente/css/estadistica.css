@@ -1,0 +1,8 @@
+.titulo_estadistica{
+	text-align: center;
+	padding: .5em;
+}
+.estadistica{
+	float: left;
+	width: 50%;
+}
