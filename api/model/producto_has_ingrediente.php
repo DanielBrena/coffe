@@ -1,11 +1,11 @@
 <?php 
 if(!defined("SPECIALCONSTANT")) die("Acceso Denegado");
 
-	$app->group('/producto_has_ingrediente', function() use($app){
+	$app->group('/producto_has_ingrediente', function() use($app,$autentificacion){
 		$app->response->headers->set('Content-Type','application/json');
 		$app->response->header('Access-Control-Allow-Origin','*');
 
-		$app->get('/all', function() use($app){
+		$app->get('/all',$autentificacion, function() use($app){
 			$sql = "SELECT * FROM producto_has_ingrediente";
 			try{
 				$db = getConnection();
@@ -35,7 +35,7 @@ if(!defined("SPECIALCONSTANT")) die("Acceso Denegado");
 		// 	}
 		// });
 
-		$app->get('/producto/:id',function($id) use($app){
+		$app->get('/producto/:id',$autentificacion,function($id) use($app){
 			$sql = "SELECT * FROM producto_has_ingrediente WHERE producto_pro_id = :id";
 			try{
 				$db = getConnection();
@@ -50,7 +50,7 @@ if(!defined("SPECIALCONSTANT")) die("Acceso Denegado");
 			}
 		});
 
-		$app->post('/add', function() use($app){
+		$app->post('/add',$autentificacion, function() use($app){
 			$request = $app->request();
 			$producto_has_ingrediente = json_decode($request->getBody());
 			$sql = "INSERT INTO producto_has_ingrediente (producto_pro_id,ingrediente_ing_id) VALUES (:producto_pro_id,:ingrediente_ing_id)";
@@ -88,7 +88,7 @@ if(!defined("SPECIALCONSTANT")) die("Acceso Denegado");
 		// 	}
 		// });
 
-		$app->delete('/delete/:id1/:id2',function($id1,$id2) use($app){
+		$app->delete('/delete/:id1/:id2',$autentificacion,function($id1,$id2) use($app){
 			$sql = "DELETE FROM producto_has_ingrediente WHERE producto_pro_id = :producto_pro_id AND ingrediente_ing_id = :ingrediente_ing_id";
 			try{
 				$db = getConnection();

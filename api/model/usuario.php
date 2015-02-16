@@ -1,11 +1,11 @@
 <?php 
 if(!defined("SPECIALCONSTANT")) die("Acceso Denegado");
 
-	$app->group('/usuario', function() use($app){
+	$app->group('/usuario', function() use($app,$autentificacion){
 		$app->response->headers->set('Content-type','application/json');
 		$app->response->header('Access-Control-Allow-Origin','*');
 
-		$app->get('/all', function() use($app){
+		$app->get('/all',$autentificacion, function() use($app){
 			$sql = "SELECT * FROM usuario";
 			try{
 				$db = getConnection();
@@ -40,7 +40,7 @@ if(!defined("SPECIALCONSTANT")) die("Acceso Denegado");
 			}
 		});
 
-		$app->get('/id/:id', function($id) use($app){
+		$app->get('/id/:id',$autentificacion, function($id) use($app){
 			$sql = "SELECT * FROM usuario WHERE usu_id = :usu_id ";
 			try{
 				$db = getConnection();
@@ -56,7 +56,7 @@ if(!defined("SPECIALCONSTANT")) die("Acceso Denegado");
 			}
 		});
 
-		$app->post('/add', function() use($app){
+		$app->post('/add',$autentificacion, function() use($app){
 			$request = $app->request();
 			$usuario = json_decode($request->getBody());
 			$sql = "INSERT INTO usuario (usu_id,usu_usuario,usu_contrasena,usu_rol) VALUES (:usu_id,:usu_usuario,:usu_contrasena,:usu_rol)";
@@ -76,7 +76,7 @@ if(!defined("SPECIALCONSTANT")) die("Acceso Denegado");
 			}
 		});
 
-		$app->put('/update/:id', function($id) use($app){
+		$app->put('/update/:id',$autentificacion, function($id) use($app){
 
 			$request = $app->request();
 			$usuario = json_decode($request->getBody());
@@ -97,7 +97,7 @@ if(!defined("SPECIALCONSTANT")) die("Acceso Denegado");
 			}
 		});
 
-		$app->delete('/delete/:id',function($id) use($app){
+		$app->delete('/delete/:id',$autentificacion,function($id) use($app){
 			$sql = "DELETE FROM usuario WHERE usu_id = :usu_id";
 			try{
 				$db = getConnection();

@@ -22,6 +22,7 @@ module.controller('Login',function($scope,ServiceLogin,$window){
                 if( data.usuario.usu_rol == 1 ){
                     page.pushPage("admin.html",{animation:"slide"});
                     $window.localStorage.setItem("usuario",data.usuario.usu_id);
+                    $window.localStorage.setItem("sesion",JSON.stringify(data.usuario));
                 }else{
                     alert();
                 }

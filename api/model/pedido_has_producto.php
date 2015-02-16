@@ -1,7 +1,7 @@
 <?php 
 if(!defined("SPECIALCONSTANT")) die("Acceso Denegado");
 
-	$app->group('/pedido_has_producto', function() use($app){
+	$app->group('/pedido_has_producto', function() use($app,$autentificacion){
 		$app->response->headers->set('Content-Type','application/json');
 		$app->response->header('Access-Control-Allow-Origin','*');
 
@@ -35,7 +35,7 @@ if(!defined("SPECIALCONSTANT")) die("Acceso Denegado");
 		// 	}
 		// });
 
-		$app->get('/pedido/:id',function($id) use($app){
+		$app->get('/pedido/:id',$autentificacion,function($id) use($app){
 			//$sql = "SELECT * FROM pedido_has_producto WHERE pedido_ped_id = :id";
 			$sql = "SELECT * FROM pedido_producto WHERE pedido_ped_id = :id";
 			try{
@@ -51,7 +51,7 @@ if(!defined("SPECIALCONSTANT")) die("Acceso Denegado");
 			}
 		});
 
-		$app->get('/total/:id',function($id) use($app){
+		$app->get('/total/:id',$autentificacion,function($id) use($app){
 			$sql = "SELECT sum(pro_precio) total FROM pedido_producto WHERE pedido_ped_id = :id";
 			try{
 				$db = getConnection();
@@ -66,7 +66,7 @@ if(!defined("SPECIALCONSTANT")) die("Acceso Denegado");
 			}
 		});
 
-		$app->post('/add', function() use($app){
+		$app->post('/add',$autentificacion, function() use($app){
 			$request = $app->request();
 			$id = uniqid();
 			$estado = "0";
@@ -88,7 +88,7 @@ if(!defined("SPECIALCONSTANT")) die("Acceso Denegado");
 			}
 		});
 
-		$app->put('/update', function() use($app){
+		$app->put('/update',$autentificacion, function() use($app){
 
 			$request = $app->request();
 			$pedido_has_producto = json_decode($request->getBody());
@@ -107,7 +107,7 @@ if(!defined("SPECIALCONSTANT")) die("Acceso Denegado");
 			}
 		});
 
-		$app->delete('/delete/:id',function($id) use($app){
+		$app->delete('/delete/:id',$autentificacion,function($id) use($app){
 			$sql = "DELETE FROM pedido_has_producto WHERE pp_id = :id";
 			try{
 				$db = getConnection();

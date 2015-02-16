@@ -1,12 +1,12 @@
 <?php 
 if(!defined("SPECIALCONSTANT")) die("Acceso Denegado");
 
-	$app->group('/categoria_producto', function() use($app){
+	$app->group('/categoria_producto', function() use($app,$autentificacion){
 		$app->response->headers->set('Content-type','application/json');
         $app->response->header('Access-Control-Allow-Origin','*');
 		
 
-		$app->get('/all', function() use($app){
+		$app->get('/all',$autentificacion, function() use($app){
             
             
 			$sql = "SELECT * FROM categoria_producto";
@@ -22,7 +22,7 @@ if(!defined("SPECIALCONSTANT")) die("Acceso Denegado");
 			}
 		});
 
-		$app->get('/id/:id', function($id) use($app){
+		$app->get('/id/:id',$autentificacion, function($id) use($app){
 			$sql = "SELECT * FROM categoria_producto WHERE cp_id = :cp_id ";
 			try{
 				$db = getConnection();
@@ -38,7 +38,7 @@ if(!defined("SPECIALCONSTANT")) die("Acceso Denegado");
 			}
 		});
         
-        $app->get('/like/:like', function($like) use($app){
+        $app->get('/like/:like',$autentificacion, function($like) use($app){
 			$sql = "SELECT * FROM categoria_producto WHERE cp_nombre like :like";
 			try{
 				$db = getConnection();
@@ -55,7 +55,7 @@ if(!defined("SPECIALCONSTANT")) die("Acceso Denegado");
 			}
 		});
 
-		$app->post('/add', function() use($app){
+		$app->post('/add',$autentificacion, function() use($app){
 			$request = $app->request();
 			$categoria_producto = json_decode($request->getBody());
 			$id = uniqid();
@@ -77,7 +77,7 @@ if(!defined("SPECIALCONSTANT")) die("Acceso Denegado");
 			}
 		});
 
-		$app->put('/update', function() use($app){
+		$app->put('/update',$autentificacion, function() use($app){
 
 			$request = $app->request();
 			$categoria_producto = json_decode($request->getBody());
@@ -97,7 +97,7 @@ if(!defined("SPECIALCONSTANT")) die("Acceso Denegado");
 			}
 		});
 
-		$app->delete('/delete/:id',function($id) use($app){
+		$app->delete('/delete/:id',$autentificacion, function($id) use($app){
 			$sql = "DELETE FROM categoria_producto WHERE cp_id = :cp_id";
 			try{
 				$db = getConnection();

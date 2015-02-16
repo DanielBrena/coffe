@@ -139,6 +139,7 @@ module.controller('Admin',function($scope,ServicePedido,ServiceProducto,$window)
     $scope.logout = function(){
         page.popPage();
         $window.localStorage.removeItem("usuario");
+        $window.localStorage.removeItem("sesion");
     }
 
     /*

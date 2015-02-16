@@ -1,17 +1,24 @@
 <?php 
 if(!defined("SPECIALCONSTANT")) die("Acceso Denegado");
 
-	$app->group('/pedido', function() use($app){
+	$app->group('/pedido', function() use($app,$autentificacion){
 		$app->response->headers->set('Content-type','application/json');
 		$app->response->header('Access-Control-Allow-Origin','*');
 
+		
 
-		$app->get('/all', function() use($app){
-			$sql = "SELECT * FROM pedido order by ped_id desc";
+		$app->get('/all',$autentificacion, function() use($app){
+			$fecha = date("Y-m-d");
+
+			$sql = "SELECT * FROM pedido WHERE ped_fecha_creacion = date(:fecha) order by ped_id desc ";
+			
 			try{
 				$db = getConnection();
-				$smt = $db->query($sql);
-				$pedidos = $smt->fetchAll(PDO::FETCH_OBJ);
+				$stmt = $db->prepare($sql);
+				$stmt->bindParam(':fecha',$fecha,PDO::PARAM_STR);
+				
+				$stmt->execute();
+				$pedidos = $stmt->fetchAll(PDO::FETCH_OBJ);
 				$db = null;
 				echo json_encode(array("pedidos" => $pedidos));
 			}
@@ -20,7 +27,7 @@ if(!defined("SPECIALCONSTANT")) die("Acceso Denegado");
 			}
 		});
 
-		$app->get('/id/:id', function($id) use($app){
+		$app->get('/id/:id',$autentificacion, function($id) use($app){
 			$sql = "SELECT * FROM pedido WHERE ped_id = :ped_id ";
 			try{
 				$db = getConnection();
@@ -36,7 +43,7 @@ if(!defined("SPECIALCONSTANT")) die("Acceso Denegado");
 			}
 		});
 
-		$app->get('/like/:like', function($like) use($app){
+		$app->get('/like/:like',$autentificacion, function($like) use($app){
 			$sql = "SELECT * FROM pedido WHERE ped_codigo like :like";
 			try{
 				$db = getConnection();
@@ -53,7 +60,7 @@ if(!defined("SPECIALCONSTANT")) die("Acceso Denegado");
 			}
 		});
 
-		$app->post('/add', function() use($app){
+		$app->post('/add',$autentificacion, function() use($app){
 			$request = $app->request();
 			$id = uniqid();
             $fecha = date("Y-m-d");
@@ -77,7 +84,7 @@ if(!defined("SPECIALCONSTANT")) die("Acceso Denegado");
 			}
 		});
 
-		$app->put('/update', function() use($app){
+		$app->put('/update',$autentificacion, function() use($app){
 
 			$request = $app->request();
 			$pedido = json_decode($request->getBody());
@@ -94,7 +101,7 @@ if(!defined("SPECIALCONSTANT")) die("Acceso Denegado");
 			}
 		});
 
-		$app->delete('/delete/:id',function($id) use($app){
+		$app->delete('/delete/:id',$autentificacion,function($id) use($app){
 			$sql = "DELETE FROM pedido WHERE ped_id = :ped_id";
 			try{
 				$db = getConnection();

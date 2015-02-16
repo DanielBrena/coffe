@@ -32,7 +32,7 @@ module.controller('Estadistica',function($scope,ServiceEstadistica){
                     ]
 
                 };
-                var ctx = document.getElementById("mensual").getContext("2d");
+                var ctx = document.getElementById("venta_mensual").getContext("2d");
                     window.myBar = new Chart(ctx).Bar(barChartData, {
                         responsive : true
                  });
@@ -41,13 +41,49 @@ module.controller('Estadistica',function($scope,ServiceEstadistica){
 		});
 	}
 
-	$scope.estadistica_semanal = function(){
-		ServiceEstadistica.week().success(function(data){
-			var labels = new Array();
-    		var datas = new Array();
+    $scope.estadistica_entrada_month = function(){
+        ServiceEstadistica.entrada_month().success(function(data){
+            console.log(data.estadisticas);
 
-			for(var i = 0; i < data.estadisticas.length; i++){
-                    labels.push("Semana " + parseInt(data.estadisticas[i].Semana));
+            var labels = new Array();
+            var datas = new Array();
+
+            for(var i = 0; i < data.estadisticas.length; i++){
+                    labels.push(data.estadisticas[i].Mes);
+                    datas.push(parseInt(data.estadisticas[i].Total));
+                }
+                var col  = "rgba(" + color() + "," + color() + "," + color();
+
+                var barChartData = {
+                    labels : labels,
+                    datasets : [
+                        {
+                            fillColor : col + ",0.5)",
+                            strokeColor : col + ",0.8)",
+                            highlightFill: col + ",0.75)",
+                            highlightStroke: col + ",1)",
+                            data : datas
+                        }
+                        
+                    ]
+
+                };
+                var ctx = document.getElementById("entrada_mensual").getContext("2d");
+                    window.myBar = new Chart(ctx).Bar(barChartData, {
+                        responsive : true
+                 });
+
+
+        });
+    }
+
+    $scope.estadistica_anual = function(){
+        ServiceEstadistica.year().success(function(data){
+            var labels = new Array();
+            var datas = new Array();
+
+            for(var i = 0; i < data.estadisticas.length; i++){
+                    labels.push("Año " + parseInt(data.estadisticas[i].anio));
                     datas.push(parseInt(data.estadisticas[i].Total));
                 }
                 
@@ -68,14 +104,52 @@ module.controller('Estadistica',function($scope,ServiceEstadistica){
                     ]
 
                 };
-                var ctx = document.getElementById("semanal").getContext("2d");
+                var ctx = document.getElementById("venta_anual").getContext("2d");
                     window.myBar = new Chart(ctx).Bar(barChartData, {
                         responsive : true
                  });
 
 
-		});
-	}
+        });
+     }
+
+
+
+	// $scope.estadistica_semanal = function(){
+	// 	ServiceEstadistica.week().success(function(data){
+	// 		var labels = new Array();
+ //    		var datas = new Array();
+
+	// 		for(var i = 0; i < data.estadisticas.length; i++){
+ //                    labels.push("Semana " + parseInt(data.estadisticas[i].Semana));
+ //                    datas.push(parseInt(data.estadisticas[i].Total));
+ //                }
+                
+
+ //                var col  = "rgba(" + color() + "," + color() + "," + color();
+
+ //                var barChartData = {
+ //                    labels : labels,
+ //                    datasets : [
+ //                        {
+ //                            fillColor : col + ",0.5)",
+ //                            strokeColor : col + ",0.8)",
+ //                            highlightFill: col + ",0.75)",
+ //                            highlightStroke: col + ",1)",
+ //                            data : datas
+ //                        }
+                        
+ //                    ]
+
+ //                };
+ //                var ctx = document.getElementById("semanal").getContext("2d");
+ //                    window.myBar = new Chart(ctx).Bar(barChartData, {
+ //                        responsive : true
+ //                 });
+
+
+	// 	});
+	// }
 	
 	
 	$scope.estadistica_anual = function(){
@@ -105,14 +179,50 @@ module.controller('Estadistica',function($scope,ServiceEstadistica){
                     ]
 
                 };
-                var ctx = document.getElementById("anual").getContext("2d");
+                var ctx = document.getElementById("venta_anual").getContext("2d");
                     window.myBar = new Chart(ctx).Bar(barChartData, {
                         responsive : true
                  });
 
 
 		});
-	}
+	 }
+
+     $scope.estadistica_entrada_anual = function(){
+        ServiceEstadistica.entrada_year().success(function(data){
+            var labels = new Array();
+            var datas = new Array();
+
+            for(var i = 0; i < data.estadisticas.length; i++){
+                    labels.push("Año " + parseInt(data.estadisticas[i].Anio));
+                    datas.push(parseInt(data.estadisticas[i].Total));
+                }
+                
+
+                var col  = "rgba(" + color() + "," + color() + "," + color();
+
+                var barChartData = {
+                    labels : labels,
+                    datasets : [
+                        {
+                            fillColor : col + ",0.5)",
+                            strokeColor : col + ",0.8)",
+                            highlightFill: col + ",0.75)",
+                            highlightStroke: col + ",1)",
+                            data : datas
+                        }
+                        
+                    ]
+
+                };
+                var ctx = document.getElementById("entrada_anual").getContext("2d");
+                    window.myBar = new Chart(ctx).Bar(barChartData, {
+                        responsive : true
+                 });
+
+
+        });
+     }
 
 	$scope.estadistica_producto_month = function(){
 		ServiceEstadistica.producto_month().success(function(data){
@@ -138,7 +248,13 @@ module.controller('Estadistica',function($scope,ServiceEstadistica){
 	};
 
 	$scope.estadistica_month();
-	$scope.estadistica_producto_month();
-	$scope.estadistica_semanal();
-	$scope.estadistica_anual();
+    $scope.estadistica_entrada_month();
+    $scope.estadistica_anual();
+    $scope.estadistica_entrada_anual();
+    $scope.estadistica_producto_month();
+
+	
+	// $scope.estadistica_semanal();
+    
+	//
 });
