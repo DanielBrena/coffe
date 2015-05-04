@@ -108,3 +108,33 @@ and year(ped_fecha_creacion) = "2015" and pro_genera_iva = "1" group by pro_id o
 /* Estadisticas productos vendidos mensuales sin iva*/
 select pro_nombre, count(*) Total from pedido_producto where month(ped_fecha_creacion) = "02" 
 and year(ped_fecha_creacion) = "2015" and pro_genera_iva = "0" group by pro_id order by Total desc;
+
+
+/* Estadisticas entraadas meses*/
+select * from entrada join categoria_entrada on entrada.categoria_entrada_ce_id = categoria_entrada.ce_id
+where year(entrada.ent_fecha_creacion) = "2015" and month (entrada.ent_fecha_creacion) = "02";
+
+select case month(entrada.ent_fecha_creacion) 
+	when '01' then 'Enero'
+	when '02' then 'Febrero'
+	when '03' then 'Marzo'
+	when '04' then 'Abril'
+	when '05' then 'Mayo'
+	when '06' then 'Junio'
+	when '07' then 'Julio'
+	when '08' then 'Agosto'
+	when '09' then 'Septiembre'
+	when '10' then 'Octubre'
+	when '11' then 'Noviembre'
+	when '12' then 'Diciembre'
+end Mes,
+ifnull(sum(entrada.ent_valor),0) Total
+from entrada join categoria_entrada on
+ entrada.categoria_entrada_ce_id = categoria_entrada.ce_id where year(ent_fecha_creacion) = "2015" 
+ group by month(ent_fecha_creacion);
+ 
+ /* Estaditica mensual */
+ 
+ select year(entrada.ent_fecha_creacion) Anio, sum(entrada.ent_valor) Total 
+ from entrada join categoria_entrada on entrada.categoria_entrada_ce_id = categoria_entrada.ce_id
+ group by  Anio;

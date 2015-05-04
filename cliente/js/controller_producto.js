@@ -2,7 +2,7 @@
 module.controller('Producto',function($scope,ServiceProducto,ServiceCategoriaProducto){
 $scope.productos = {};
 $scope.producto = {};
-    
+$scope.categoria_productos = {};    
     /*
     Obtiene todos los productos.
 
@@ -61,8 +61,9 @@ $scope.producto = {};
 
         }else{
             ServiceProducto.add_producto($scope.producto).success(function(){
-                $scope.producto_all();
+                $scope.categoria_producto_all();
                 alerta("Se creo el producto.");
+                $scope.producto_all();
             }).error(function(e){
                 console.log(e);
             });
@@ -76,6 +77,8 @@ $scope.producto = {};
     $scope.categoria_producto_all = function(){
         ServiceCategoriaProducto.all().success(function(data){
             $scope.categoria_productos = data.categoria_productos;
+            $scope.producto.categoria_producto_cp_id = data.categoria_productos[0].cp_id;
+           
         }).error(function(e){
             console.log(e);
         });
@@ -101,7 +104,7 @@ $scope.producto = {};
             switch(idx) {
              
               case 1:
-                    ServiceProducto.delete(id).success(function(data){
+                    ServiceProducto.delete_producto(id).success(function(data){
                       $scope.producto_all();
                     });
                 break;
